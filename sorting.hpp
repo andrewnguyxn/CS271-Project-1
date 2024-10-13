@@ -15,11 +15,11 @@ using namespace std;
 
 // Declaration for insertion sort
 template<typename T>
-    void insertionSort(T* arr, long n);
+    void insertion_sort(T* arr, long n);
 
 // Declaration for merge sort
 template<typename T>
-    void mergeSort(T* arr, long n);
+    void merge_sort(T* arr, long n);
 
 // Declaration for quicksort
 template<typename T>
@@ -27,7 +27,9 @@ template<typename T>
 
 // Declaration for improved quicksort
 template<typename T>
-    void improvedQuicksort(T* arr, long n);
+    void improved_quicksort(T* arr, long n);
 
+template<typename T>
+    void randomized_quicksort(T* arr)
 #endif
 

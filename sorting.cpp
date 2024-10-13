@@ -15,13 +15,13 @@
 
 // Definition for insertion sort
 template<typename T>
-    void insertionSort(T* arr, long n) {
+    void insertion_sort(T* arr, long n) {
     
 }
 
 // Definition for merge sort
 template<typename T>
-    void mergeSort(T* arr, long n) {
+    void merge_sort(T* arr, long n) {
     
 }
 
@@ -33,10 +33,10 @@ template<typename T>
 
 // Definition for improved quicksort
 template<typename T>
-    void improvedQuicksort(T* arr, long n) {
+    void improved_quicksort(T* arr, long n) {
     
 }
 
 // Definition for randomized quicksort
 template<typename T>
-    void randomizedQuicksort(T* arr, long n);
+    void randomized_quicksort(T* arr, long n);
