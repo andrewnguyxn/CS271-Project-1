@@ -14,7 +14,22 @@ using namespace std;
 // Definition for insertion sort
 template<typename T>
     void insertion_sort(T* arr, long n) {
+        // length n = 1 is "sorted"
+        if (n > 1){
+            int j;
+            T current;
+            for (long i = 1; i < n; i++ ){
+                j = i - 1;
+                current = arr[i];
+                while (j >= 0 && arr[j] > current){ //condition 1: iterates backward from array until last element, condition 2: element before is greater than current element
+                    arr[j] = arr[j + 1];
+                    j--;
+                }
+                arr[j + 1] = current;
+            }
+        }
 }
+
 // Definition for merge sort
 template<typename T>
     void merge_sort(T* arr, long n) {
@@ -26,11 +41,6 @@ template<typename T>
     void quicksort(T* arr, long n) {
     
 }
-
-// Definition for randomized quicksort
-template<typename T>
-    void randomized_quicksort(T* arr, long n);
-
 template <typename T>
     T find_median_pivot_index(T *arr, long low, long high)
     {
@@ -82,10 +92,13 @@ void fixed_improved_quicksort(T* arr, long low, long high) {
         fixed_improved_quicksort(arr, pivot + 1, high);
     }
 }
+
 // Definition for improved quicksort
 template<typename T>
     void improved_quicksort(T* arr, long n) {
         fixed_improved_quicksort(arr, 0, n-1);
 }
 
-
+// Definition for randomized quicksort
+template<typename T>
+    void randomized_quicksort(T* arr, long n);
