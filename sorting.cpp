@@ -11,30 +11,97 @@
 #include "sorting.hpp"
 using namespace std;
 
-// Definition for insertion sort
+//==============================================================
+// Insertion_sort
+// Author: Tri Dang
+// Sorts the array in ascending order via comparison of each previous elements by incrementing indices. 
+// Parameters:
+//     Array, long n (length of array)
+// Return value: 
+//     None
+//==============================================================
 template<typename T>
-void insertion_sort(T *arr, long n) {
-    // length n = 1 is "sorted"
-    if (n > 1){
-        int j;
-        T current;
-        for (long i = 1; i < n; i++ ){
-            j = i - 1;
-            current = arr[i];
-            while (j >= 0 && arr[j] > current){ //condition 1: iterates backward from array until last element, condition 2: element before is greater than current element
-                arr[j + 1] = arr[j];
-                j--;
+    void insertion_sort(T* arr, long n) {
+        // length n = 1 is "sorted"
+        if (n > 1){
+            int j;
+            T current;
+            for (long i = 1; i < n; i++ ){
+                j = i - 1;
+                current = arr[i];
+                while (j >= 0 && arr[j] > current){ //condition 1: iterates backward from array until last element, condition 2: element before is greater than current element
+                    arr[j + 1] = arr[j]; //shift bigger elements to the right
+                    j--;
+                }
+                arr[j + 1] = current;
             }
-            arr[j + 1] = current;
         }
-    }
 }
 
-
-// Definition for merge sort
+// Definition for merge. Essential for merge_sort
 template<typename T>
-void merge_sort(T *arr, long n) {
-    
+    void merge(T* arr ,T* firHalf, T* secHalf, long firN, long secN){
+        long leftCount = 0; // splitted array of the 1st half
+        long rightCount = 0; //splitted array of the 2nd half
+        long arrCount = 0; // used for main array indices
+
+        while((leftCount < firN) && rightCount < secN){
+            if(firHalf[leftCount] <= secHalf[rightCount]){
+                arr[arrCount] = firHalf[leftCount];
+                leftCount++;
+            } else{
+                arr[arrCount] = secHalf[rightCount];
+                rightCount++;
+            }
+            arrCount++;
+        }
+        if (leftCount < firN){
+            for (long j = leftCount; j < firN; j++){
+                arr[arrCount] = firHalf[j];
+                arrCount++;
+            }
+        }
+        if (rightCount < secN){
+            for (long i = rightCount; i < secN; i++){
+                arr[arrCount] = secHalf[i];
+                arrCount++;
+            }
+        }
+    }
+
+//==============================================================
+// Merge_sort
+// Author: Tri Dang
+// We first split the array into its base case where it is an array of 1 element.
+// Then, we compare each element, sort them to ascending order, building halves after halves.
+// until we finally rebuilt the array into its sorted, ascended order. 
+// Parameters:
+//     Array, long n (length of array)
+// Return value: 
+//     None
+//==============================================================
+template<typename T>
+    void merge_sort(T* arr, long n) {
+        if (n <= 1){
+            return;
+        } else{
+            long middle = n / 2;
+            T* firHalf = new T[middle];
+            T* secHalf = new T[n - middle];
+            for (long i = 0; i < middle; i++){
+                firHalf[i] = arr[i];
+            }
+            for (long j = 0; j < n - middle; j++){
+                secHalf[j] = arr[j + middle];
+            }
+            merge_sort(firHalf, middle);
+            merge_sort(secHalf , n - middle);
+
+            merge(arr, firHalf, secHalf, middle, n - middle);
+
+            delete[] firHalf; //avoid memory leaks after merging
+            delete[] secHalf;
+        }
 }
 
 //==============================================================
