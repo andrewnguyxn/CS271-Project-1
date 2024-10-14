@@ -31,6 +31,7 @@ template<typename T>
 
 template<typename T>
     void randomized_quicksort(T *arr);
-
+template<typename T>
+    void merge(T* arr ,T* firHalf, T* secHalf, long firN, long secN);
 #endif
 
