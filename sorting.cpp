@@ -13,59 +13,98 @@ using namespace std;
 
 // Definition for insertion sort
 template<typename T>
-    void insertion_sort(T* arr, long n) {
-        // length n = 1 is "sorted"
-        if (n > 1){
-            int j;
-            T current;
-            for (long i = 1; i < n; i++ ){
-                j = i - 1;
-                current = arr[i];
-                while (j >= 0 && arr[j] > current){ //condition 1: iterates backward from array until last element, condition 2: element before is greater than current element
-                    arr[j] = arr[j + 1];
-                    j--;
-                }
-                arr[j + 1] = current;
+void insertion_sort(T* arr, long n) {
+    // length n = 1 is "sorted"
+    if (n > 1){
+        int j;
+        T current;
+        for (long i = 1; i < n; i++ ){
+            j = i - 1;
+            current = arr[i];
+            while (j >= 0 && arr[j] > current){ //condition 1: iterates backward from array until last element, condition 2: element before is greater than current element
+                arr[j + 1] = arr[j];
+                j--;
             }
+            arr[j + 1] = current;
         }
+    }
 }
+
 
 // Definition for merge sort
 template<typename T>
-    void merge_sort(T* arr, long n) {
+void merge_sort(T* arr, long n) {
     
 }
 
 // Definition for quicksort
 template<typename T>
-    void quicksort(T* arr, long n) {
+void quicksort(T* arr, long n) {
     
 }
+
+//==============================================================
+// Function : find_median_pivot_index
+// Huy Phan
+// Description: 
+// Find median in the sub array
+// PARAMETERS:
+// Array, low, and high which are the smallest and highest index
+// inside of a sub array
+// RETURN VALUE:
+// return the median pivot index
+//==============================================================
 template <typename T>
-    T find_median_pivot_index(T *arr, long low, long high)
-    {
-        if(high - low + 1 < 3){
-            return high; 
-        }
-        long mid = (low + high) / 2; 
-        T first = arr[low], middle = arr[mid], last = arr[high];
-
-        if ((first <= middle && middle <= last) || (last <= middle && middle <= first)) {
-            return mid;
-        } else if ((middle <= first && first <= last) || (last <= first && first <= middle)) {
-            return low;
-        } else {
-            return high;
-        }
+T find_median_pivot_index(T *arr, long low, long high){
+    if(high - low + 1 < 3){
+        return high; 
     }
+    long mid = (low + high) / 2; 
+    T first_item = arr[low], median_item = arr[mid], last_item = arr[high];
 
-template<typename T>
-    void swapping(T& a, T& b) {
-        T temp = a;  
-        a = b;       
-        b = temp;    
+    if ((first_item <= median_item && median_item <= last_item) || (last_item <= median_item && median_item <= first_item)) {
+        return mid;
+    } else if ((median_item <= first_item && first_item <= last_item) || (last_item <= first_item && first_item <= median_item)) {
+        return low;
+    } else {
+        return high;
+    }
 }
 
+//==============================================================
+// Function: swapping
+// Huy Phan
+// Description: 
+// swapping two element within an array
+// PARAMETERS:
+// T& a, T& b: two elements a and b in an array
+// RETURN VALUE:
+// none, but swap a and b 
+//==============================================================
+template<typename T>
+void swapping(T& a, T& b) {
+    T temp = a;  
+    a = b;       
+    b = temp;    
+}
+
+//==============================================================
+// Function: partition
+// Author: Huy Phan
+// Description: 
+// Partitions the array around a pivot element, using the median-of-three strategy 
+// to select the pivot. The pivot is placed in its correct sorted position, and all 
+// elements less than the pivot are moved to the left, while all greater elements 
+// are moved to the right.
+//
+// PARAMETERS:
+// T* arr       - Pointer to the array to be partitioned.
+// long low     - The starting index of subarray.
+// long high    - The ending index of subarray.
+//
+// RETURN VALUE:
+// long         - The index of the pivot element after partitioning.
+//==============================================================
 template<typename T>
 long partition(T* arr, long low, long high) {
     long medianIndex = find_median_pivot_index(arr,low,high);
@@ -84,6 +123,22 @@ long partition(T* arr, long low, long high) {
     return (i + 1);
 }
 
+//==============================================================
+// Function: fixed_improved_quicksort
+// Description: 
+// Mainly use for convenience 
+// Recursively sorts an array segment using the quicksort algorithm, selecting a pivot
+// element and partitioning the segment around it. 
+//
+// PARAMETERS:
+// T* arr       - Pointer to the array to be sorted.
+// long low     - The starting index of the sub array
+// long high    - The ending index of the subarray
+//
+// RETURN VALUE:
+// None         - The array is sorted in-place.
+//
+//==============================================================
 template<typename T>
 void fixed_improved_quicksort(T* arr, long low, long high) {
     if (low < high) {
@@ -93,10 +148,23 @@ void fixed_improved_quicksort(T* arr, long low, long high) {
     }
 }
 
-// Definition for improved quicksort
+//==============================================================
+// Function: improved_quicksort
+// Description: 
+// Used to call fixed_improved_quicksort for convenience
+//
+// PARAMETERS:
+// T* arr       - Pointer to the array to be sorted.
+// long low     - The starting index of the sub array
+// long high    - The ending index of the subarray
+//
+// RETURN VALUE:
+// None         - The array is sorted in-place.
+//
+//==============================================================
 template<typename T>
-    void improved_quicksort(T* arr, long n) {
-        fixed_improved_quicksort(arr, 0, n-1);
+void improved_quicksort(T* arr, long n) {
+    fixed_improved_quicksort(arr, 0, n-1);
 }
 
 // Definition for randomized quicksort

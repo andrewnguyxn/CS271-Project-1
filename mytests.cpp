@@ -10,11 +10,22 @@
 #include "sorting.cpp"
 using namespace std;
 
-/* bool test_insertion_sort();
+bool test_insertion_sort(){
+    int arr[] = {10, 7, 8, 9, 1, 5};
+    long n = sizeof(arr) / sizeof(arr[0]);
+
+    insertion_sort(arr, n);
+
+    cout << "Sorted array: ";
+    for (int i = 0; i < n; i++) {
+        cout << arr[i] << " ";
+    }
+    cout<<endl;
+    return true;
+};
 bool test_merge_sort();
-bool test_quicksort(); */
-bool test_improved_quicksort()
-{
+bool test_quicksort();
+bool test_improved_quicksort(){
     int arr[] = {10, 7, 8, 9, 1, 5};
     long n = sizeof(arr) / sizeof(arr[0]);
 
@@ -24,15 +35,18 @@ bool test_improved_quicksort()
     for (int i = 0; i < n; i++) {
         cout << arr[i] << " ";
     }
+    cout<<endl;
     return true;
 }
+bool test_randomized_quicksort();
+
 bool test_randomized_quicksort();
 
 int main() {
     int passed = 0, failed = 0;
 
-    /* if (test_insertion_sort()) passed++; else failed++;
-    if (test_merge_sort()) passed++; else failed++;
+    if (test_insertion_sort()) passed++; else failed++;
+    /* if (test_merge_sort()) passed++; else failed++;
     if (test_quicksort()) passed++; else failed++; */
     if (test_improved_quicksort()) passed++; else failed++;
     /* if (test_randomized_quicksort()) passed++; else failed++; */
