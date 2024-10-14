@@ -25,4 +25,4 @@ If you have not make any adjustments, you could run the test again by typing ./m
 
 Running "make sorting" on the terminal gives an object file sorting.0
 
-You can clear these objects by entering make clear in the terminal
+You can clear these objects by entering "make clean" in the terminal
