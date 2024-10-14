@@ -16,7 +16,20 @@
 // Definition for insertion sort
 template<typename T>
     void insertion_sort(T* arr, long n) {
-    
+        // length n = 1 is "sorted"
+        if (n > 1){
+            int j;
+            T current;
+            for (long i = 1; i < n; i++ ){
+                j = i - 1;
+                current = arr[i];
+                while (j >= 0 && arr[j] > current){ //condition 1: iterates backward from array until last element, condition 2: element before is greater than current element
+                    arr[j] = arr[j + 1];
+                    j--;
+                }
+                arr[j + 1] = current;
+            }
+        }
 }
 
 // Definition for merge sort
