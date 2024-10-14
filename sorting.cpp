@@ -3,9 +3,9 @@
 // Class: CS 271-01
 // Project 1:
 // Date: 10/13/2024
-// About: DoublyLinkedList.cpp contains the implementations of
-// the methods for the DoublyLinkedList class, as defined in
-// the header file DoublyLinkedList.hpp.
+// About: sorting.cpp contains the implementations of the 
+// sorting algorithms, namely insertion_sort, merge_sort
+// quicksort, randomized_quicksort and improved_quicksort.
 //==============================================================
 #include <iostream>
 #include "sorting.hpp"
@@ -54,7 +54,24 @@ void exchange(T& a, T& b) {
     b = temp;    
 }
 
-// Partition function
+//==============================================================
+// Function : partition
+// Andrew Nguyen
+//
+// Description: 
+// Partitions the elements around the pivot, which is set to the
+// last element of the array. Elements smaller than the pivot 
+// will be moved to the left of the pivot, elements larger will  
+// be moved to the right.
+//
+// PARAMETERS:
+// T* arr       - Pointer to the array to be partitioned.
+// long low     - The starting index of subarray.
+// long high    - The ending index of subarray.
+//
+// RETURN VALUE:
+// return the next pivot index
+//==============================================================
 template<typename T>
 long partition(T *arr, long low, long high) {
     T pivot = arr[high];
@@ -70,7 +87,21 @@ long partition(T *arr, long low, long high) {
     return (i + 1);
 }
 
-// Quicksort function
+//==============================================================
+// Function : quicksort
+// Andrew Nguyen
+//
+// Description: 
+// Sort the array recurrsively using the quicksort algorithm by 
+// chosing a pivot and partioning elements around it.
+//
+// PARAMETERS:
+// T* arr       - Pointer to the array to be partitioned.
+// long low     - The starting index of subarray.
+// long high    - The ending index of subarray.
+//
+// RETURN VALUE: none
+//==============================================================
 template<typename T>
 void quicksort(T *arr, long low, long high) {
     if (low < high) {
@@ -80,13 +111,39 @@ void quicksort(T *arr, long low, long high) {
     }
 }
 
-// Initial call of quicksort function
+//==============================================================
+// Function : quicksort
+// Andrew Nguyen
+//
+// Description: 
+// Initial call of the quicksort fucntion
+//
+// PARAMETERS:
+// T* arr       - Pointer to the array to be partitioned.
+// long n       - Size of array
+//
+// RETURN VALUE: none
+//==============================================================
 template<typename T>
 void quicksort(T *arr, long n) {
     quicksort(arr, 0, n - 1);
 }
 
-// Randomized partion function
+//==============================================================
+// Function : randomized_partition
+// Andrew Nguyen
+//
+// Description: 
+// Choose a pivot point randomly between the lowest and highest index,
+// swap it with the highest index then proceed as usual.
+//
+// PARAMETERS:
+// T* arr       - Pointer to the array to be partitioned.
+// long low     - The starting index of subarray.
+// long high    - The ending index of subarray.
+//
+// RETURN VALUE: call the normal partition function with the modified array
+//==============================================================
 template<typename T>
 long randomized_partition(T *arr, long low, long high) {
     // Generate a random index between low and high then proceed as usual
@@ -95,7 +152,21 @@ long randomized_partition(T *arr, long low, long high) {
     return partition(arr, low, high);
 }
 
-// Recursive randomized quicksort function
+//==============================================================
+// Function : randomized_quicksort
+// Andrew Nguyen
+//
+// Description: 
+// Sort the array recurrsively using the quicksort algorithm by 
+// chosing a pivot randomly and partioning elements around it.
+//
+// PARAMETERS:
+// T* arr       - Pointer to the array to be partitioned.
+// long low     - The starting index of subarray.
+// long high    - The ending index of subarray.
+//
+// RETURN VALUE: none
+//==============================================================
 template<typename T>
 void randomized_quicksort(T *arr, long low, long high) {
     if (low < high) {
@@ -105,7 +176,19 @@ void randomized_quicksort(T *arr, long low, long high) {
     }
 }
 
-// Initial call of randomized quicksort function
+//==============================================================
+// Function : randomized_quicksort
+// Andrew Nguyen
+//
+// Description: 
+// Initial call of the randomized_quicksort function
+//
+// PARAMETERS:
+// T* arr       - Pointer to the array to be partitioned.
+// long n       - Size of array
+//
+// RETURN VALUE: none
+//==============================================================
 template<typename T>
 void randomized_quicksort(T *arr, long n) {
     randomized_quicksort(arr, 0, n - 1);
