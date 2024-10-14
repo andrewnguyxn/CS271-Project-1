@@ -30,7 +30,7 @@ template<typename T>
     void improved_quicksort(T *arr, long n);
 
 template<typename T>
-    void randomized_quicksort(T *arr);
+    void randomized_quicksort(T *arr,long n);
 
 #endif
 

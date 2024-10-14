@@ -83,8 +83,8 @@ void plot(int SIZE, ofstream& csv_file) {
 int main() {
     ofstream csv_file("runtime_data_output.csv");
 
-    // Set the desired precision for floating-point numbers
-    csv_file << std::fixed << std::setprecision(5);
+    // Set precision for floating-point output to 5 decimal places
+    csv_file << std::fixed << std::setprecision(7);
 
     csv_file << "InputSize,InsertionSort,MergeSort,Quicksort,ImprovedQuicksort,RandomizedQuicksort,DefaultSort\n";
 
