@@ -73,17 +73,17 @@ T find_median_pivot_index(T *arr, long low, long high){
 }
 
 //==============================================================
-// Function: swapping
-// Huy Phan
+// Function: exchange
+// Huy Phan & Andrew Nguyen
 // Description: 
-// swapping two element within an array
+// exchange two element within an array
 // PARAMETERS:
 // T& a, T& b: two elements a and b in an array
 // RETURN VALUE:
 // none, but swap a and b 
 //==============================================================
 template<typename T>
-void swapping(T& a, T& b) {
+void exchange(T& a, T& b) {
     T temp = a;  
     a = b;       
     b = temp;    
@@ -107,9 +107,9 @@ void swapping(T& a, T& b) {
 // long         - The index of the pivot element after partitioning.
 //==============================================================
 template<typename T>
-long partition(T* arr, long low, long high) {
+long median_partition(T* arr, long low, long high) {
     long medianIndex = find_median_pivot_index(arr,low,high);
-    swapping(arr[medianIndex], arr[high]);
+    exchange(arr[medianIndex], arr[high]);
 
     T pivot = arr[high];
     long i = (low - 1);
@@ -117,11 +117,11 @@ long partition(T* arr, long low, long high) {
     for (long j = low; j <= high - 1; j++) {
         if (arr[j] <= pivot) {
             i++;
-            swapping(arr[i], arr[j]);
+            exchange(arr[i], arr[j]);
         }
     }
     // Swap the pivot element with the element at index (i + 1)
-    swapping(arr[i + 1], arr[high]); 
+    exchange(arr[i + 1], arr[high]); 
     return (i + 1); // Return the pivot index
 }
 
@@ -145,7 +145,7 @@ long partition(T* arr, long low, long high) {
 template<typename T>
 void fixed_improved_quicksort(T* arr, long low, long high) {
     if (low < high) {
-        long pivot = partition(arr, low, high);
+        long pivot = median_partition(arr, low, high);
         fixed_improved_quicksort(arr, low, pivot - 1); //Left subarray
         fixed_improved_quicksort(arr, pivot + 1, high); //Right subarray
     }
