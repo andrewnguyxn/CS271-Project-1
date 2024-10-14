@@ -62,6 +62,7 @@ T find_median_pivot_index(T *arr, long low, long high){
     long mid = (low + high) / 2; 
     T first_item = arr[low], median_item = arr[mid], last_item = arr[high];
 
+    // Determing the median between 3 values
     if ((first_item <= median_item && median_item <= last_item) || (last_item <= median_item && median_item <= first_item)) {
         return mid;
     } else if ((median_item <= first_item && first_item <= last_item) || (last_item <= first_item && first_item <= median_item)) {
@@ -125,6 +126,7 @@ long partition(T* arr, long low, long high) {
 
 //==============================================================
 // Function: fixed_improved_quicksort
+// Huy Phan
 // Description: 
 // Mainly use for convenience 
 // Recursively sorts an array segment using the quicksort algorithm, selecting a pivot
@@ -150,6 +152,7 @@ void fixed_improved_quicksort(T* arr, long low, long high) {
 
 //==============================================================
 // Function: improved_quicksort
+// Huy Phan
 // Description: 
 // Used to call fixed_improved_quicksort for convenience
 //

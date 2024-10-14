@@ -10,47 +10,167 @@
 #include "sorting.cpp"
 using namespace std;
 
-bool test_insertion_sort(){
-    int arr[] = {10, 7, 8, 9, 1, 5};
-    long n = sizeof(arr) / sizeof(arr[0]);
-
-    insertion_sort(arr, n);
-
+// ==============================================================
+// Huy Phan
+// Print out the sorted array
+//==============================================================
+template <typename T>
+void print_output(T* arr, long n, const string& test_name) {
+    cout << test_name << endl;
     cout << "Sorted array: ";
-    for (int i = 0; i < n; i++) {
+    for (long i = 0; i < n; i++) {
         cout << arr[i] << " ";
     }
-    cout<<endl;
-    return true;
-};
-bool test_merge_sort();
-bool test_quicksort();
-bool test_improved_quicksort(){
-    int arr[] = {10, 7, 8, 9, 1, 5};
-    long n = sizeof(arr) / sizeof(arr[0]);
+    cout << endl;
+}
 
-    improved_quicksort(arr, n);
-
-    cout << "Sorted array: ";
-    for (int i = 0; i < n; i++) {
-        cout << arr[i] << " ";
+// ==============================================================
+// Huy Phan
+// verify array match output
+//==============================================================
+template <typename T>
+bool verify(T* arr, long n, T* expected, const string& test_name) {
+    for (long i = 0; i < n; i++) {
+        if (arr[i] != expected[i]) {
+            cout << test_name << " failed at index " << i << ": expected " << expected[i]
+                 << " but got " << arr[i] << endl;
+            return false;
+        }
     }
-    cout<<endl;
     return true;
 }
-bool test_randomized_quicksort();
 
-bool test_randomized_quicksort();
+// ==============================================================
+// Huy Phan
+// Test the insertion_sort method on regular case
+//==============================================================
+bool test_insertion_sort_regular() {
+    int arr[] = {10, 7, 8, 9, 1, 5};
+    long n = sizeof(arr) / sizeof(arr[0]);
+    int expected[] = {1, 5, 7, 8, 9, 10};
 
+    insertion_sort(arr, n);
+    print_output(arr, n, "Insertion Sort Test 1: Regular Case");
+    return verify(arr, n, expected, "Insertion Sort Test 1: Regular Case");
+}
+
+// ==============================================================
+// Huy Phan
+// Test the insertion_sort method on duplicate case
+//==============================================================
+bool test_insertion_sort_duplicates() {
+    int arr[] = {4, 1, 3, 1, 2, 4};
+    long n = sizeof(arr) / sizeof(arr[0]);
+    int expected[] = {1, 1, 2, 3, 4, 4};
+
+    insertion_sort(arr, n);
+    print_output(arr, n, "Insertion Sort Test 2: Duplicates");
+    return verify(arr, n, expected, "Insertion Sort Test 2: Duplicates");
+}
+
+// ==============================================================
+// Huy Phan
+// Test the insertion_sort method on character case
+//==============================================================
+bool test_insertion_sort_characters() {
+    char arr[] = {'d', 'b', 'a', 'c', 'e'};
+    long n = sizeof(arr) / sizeof(arr[0]);
+    char expected[] = {'a', 'b', 'c', 'd', 'e'};
+
+    insertion_sort(arr, n);
+    print_output(arr, n, "Insertion Sort Test 3: Characters");
+    return verify(arr, n, expected, "Insertion Sort Test 3: Characters");
+}
+
+// ==============================================================
+// Huy Phan
+// Test the insertion_sort method on already sorted case
+//==============================================================
+bool test_insertion_sort_already_sorted() {
+    int arr[] = {1, 2, 3, 4, 5, 6};
+    long n = sizeof(arr) / sizeof(arr[0]);
+    int expected[] = {1, 2, 3, 4, 5, 6};
+
+    insertion_sort(arr, n);
+    print_output(arr, n, "Insertion Sort Test 4: Already Sorted");
+    return verify(arr, n, expected, "Insertion Sort Test 4: Already Sorted");
+}
+
+// ==============================================================
+// Huy Phan
+// Test the improved_quicksort method on regular case
+//==============================================================
+bool test_improved_quicksort_regular() {
+    int arr[] = {10, 7, 8, 9, 1, 5};
+    long n = sizeof(arr) / sizeof(arr[0]);
+    int expected[] = {1, 5, 7, 8, 9, 10};
+
+    improved_quicksort(arr, n);
+    print_output(arr, n, "Improved Quicksort Test 1: Regular Case");
+    return verify(arr, n, expected, "Improved Quicksort Test 1: Regular Case");
+}
+
+// ==============================================================
+// Huy Phan
+// Test the improved_quicksort method on duplicate case
+//==============================================================
+bool test_improved_quicksort_duplicates() {
+    int arr[] = {4, 1, 3, 1, 2, 4};
+    long n = sizeof(arr) / sizeof(arr[0]);
+    int expected[] = {1, 1, 2, 3, 4, 4};
+
+    improved_quicksort(arr, n);
+    print_output(arr, n, "Improved Quicksort Test 2: Duplicates");
+    return verify(arr, n, expected, "Improved Quicksort Test 2: Duplicates");
+}
+
+// ==============================================================
+// Huy Phan
+// Test the improved_quicksort method on character case
+//==============================================================
+bool test_improved_quicksort_characters() {
+    char arr[] = {'d', 'b', 'a', 'c', 'e'};
+    long n = sizeof(arr) / sizeof(arr[0]);
+    char expected[] = {'a', 'b', 'c', 'd', 'e'};
+
+    improved_quicksort(arr, n);
+    print_output(arr, n, "Improved Quicksort Test 3: Characters");
+    return verify(arr, n, expected, "Improved Quicksort Test 3: Characters");
+}
+
+// ==============================================================
+// Huy Phan
+// Test the improved_quicksort method on already sorted case
+//==============================================================
+bool test_improved_quicksort_already_sorted() {
+    int arr[] = {1, 2, 3, 4, 5, 6};
+    long n = sizeof(arr) / sizeof(arr[0]);
+    int expected[] = {1, 2, 3, 4, 5, 6};
+
+    improved_quicksort(arr, n);
+    print_output(arr, n, "Improved Quicksort Test 4: Already Sorted");
+    return verify(arr, n, expected, "Improved Quicksort Test 4: Already Sorted");
+}
+
+// ==============================================================
+// Main Function
+//==============================================================
 int main() {
     int passed = 0, failed = 0;
 
-    if (test_insertion_sort()) passed++; else failed++;
-    /* if (test_merge_sort()) passed++; else failed++;
-    if (test_quicksort()) passed++; else failed++; */
-    if (test_improved_quicksort()) passed++; else failed++;
-    /* if (test_randomized_quicksort()) passed++; else failed++; */
+    // INSERTION SORT TESTS
+    if (test_insertion_sort_regular()) passed++; else failed++;
+    if (test_insertion_sort_duplicates()) passed++; else failed++;
+    if (test_insertion_sort_characters()) passed++; else failed++;
+    if (test_insertion_sort_already_sorted()) passed++; else failed++;
 
+
+    // IMPROVED QUICKSORT TESTS
+    if (test_improved_quicksort_regular()) passed++; else failed++;
+    if (test_improved_quicksort_duplicates()) passed++; else failed++;
+    if (test_improved_quicksort_characters()) passed++; else failed++;
+    if (test_improved_quicksort_already_sorted()) passed++; else failed++;
+    
     // Output final test results
     cout << "Tests passed: " << passed << endl;
     cout << "Tests failed: " << failed << endl;
