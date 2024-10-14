@@ -45,7 +45,7 @@ template<typename T>
         long rightCount = 0; //splitted array of the 2nd half
         long arrCount = 0; // used for main array indices
 
-        while((leftCount < firN) && rightCount < secN){
+        while((leftCount < firN) && rightCount < secN){ //comparison between 2 halves
             if(firHalf[leftCount] <= secHalf[rightCount]){
                 arr[arrCount] = firHalf[leftCount];
                 leftCount++;
@@ -55,13 +55,13 @@ template<typename T>
             }
             arrCount++;
         }
-        if (leftCount < firN){
+        if (leftCount < firN){ //add remaining element from left half
             for (long j = leftCount; j < firN; j++){
                 arr[arrCount] = firHalf[j];
                 arrCount++;
             }
         }
-        if (rightCount < secN){
+        if (rightCount < secN){ //add remaining element from right half
             for (long i = rightCount; i < secN; i++){
                 arr[arrCount] = secHalf[i];
                 arrCount++;
@@ -82,19 +82,19 @@ template<typename T>
 //==============================================================
 template<typename T>
     void merge_sort(T* arr, long n) {
-        if (n <= 1){
+        if (n <= 1){ //base case; cannot be split anymore.
             return;
         } else{
             long middle = n / 2;
             T* firHalf = new T[middle];
             T* secHalf = new T[n - middle];
-            for (long i = 0; i < middle; i++){
+            for (long i = 0; i < middle; i++){ //copies first half of an array
                 firHalf[i] = arr[i];
             }
-            for (long j = 0; j < n - middle; j++){
+            for (long j = 0; j < n - middle; j++){ //copies other half of an array
                 secHalf[j] = arr[j + middle];
             }
-            merge_sort(firHalf, middle);
+            merge_sort(firHalf, middle); // recursively halves array until it base case
             merge_sort(secHalf , n - middle);
 
             merge(arr, firHalf, secHalf, middle, n - middle);
