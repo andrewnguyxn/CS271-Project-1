@@ -120,8 +120,9 @@ long partition(T* arr, long low, long high) {
             swapping(arr[i], arr[j]);
         }
     }
-    swapping(arr[i + 1], arr[high]);
-    return (i + 1);
+    // Swap the pivot element with the element at index (i + 1)
+    swapping(arr[i + 1], arr[high]); 
+    return (i + 1); // Return the pivot index
 }
 
 //==============================================================
@@ -145,8 +146,8 @@ template<typename T>
 void fixed_improved_quicksort(T* arr, long low, long high) {
     if (low < high) {
         long pivot = partition(arr, low, high);
-        fixed_improved_quicksort(arr, low, pivot - 1);
-        fixed_improved_quicksort(arr, pivot + 1, high);
+        fixed_improved_quicksort(arr, low, pivot - 1); //Left subarray
+        fixed_improved_quicksort(arr, pivot + 1, high); //Right subarray
     }
 }
 
