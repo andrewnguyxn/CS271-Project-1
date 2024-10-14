@@ -13,7 +13,7 @@ using namespace std;
 
 // Definition for insertion sort
 template<typename T>
-void insertion_sort(T* arr, long n) {
+void insertion_sort(T *arr, long n) {
     // length n = 1 is "sorted"
     if (n > 1){
         int j;
@@ -33,14 +33,82 @@ void insertion_sort(T* arr, long n) {
 
 // Definition for merge sort
 template<typename T>
-void merge_sort(T* arr, long n) {
+void merge_sort(T *arr, long n) {
     
 }
 
-// Definition for quicksort
+//==============================================================
+// Function: exchange
+// Huy Phan & Andrew Nguyen
+// Description: 
+// exchange two element within an array
+// PARAMETERS:
+// T& a, T& b: two elements a and b in an array
+// RETURN VALUE:
+// none, but swap a and b 
+//==============================================================
 template<typename T>
-void quicksort(T* arr, long n) {
-    
+void exchange(T& a, T& b) {
+    T temp = a;  
+    a = b;       
+    b = temp;    
+}
+
+// Partition function
+template<typename T>
+long partition(T *arr, long low, long high) {
+    T pivot = arr[high];
+    long i = low - 1;
+
+    for (long j = low; j < high; j++) {
+        if (arr[j] <= pivot) {
+            i++;
+            exchange(arr[i], arr[j]);
+        }
+    }
+    exchange(arr[i + 1], arr[high]);
+    return (i + 1);
+}
+
+// Quicksort function
+template<typename T>
+void quicksort(T *arr, long low, long high) {
+    if (low < high) {
+        long pivot = partition(arr, low, high);
+        quicksort(arr, low, pivot - 1);
+        quicksort(arr, pivot + 1, high);
+    }
+}
+
+// Initial call of quicksort function
+template<typename T>
+void quicksort(T *arr, long n) {
+    quicksort(arr, 0, n - 1);
+}
+
+// Randomized partion function
+template<typename T>
+long randomized_partition(T *arr, long low, long high) {
+    // Generate a random index between low and high then proceed as usual
+    long random_pivot = low + rand() % (high - low + 1);
+    exchange(arr[random_pivot], arr[high]);
+    return partition(arr, low, high);
+}
+
+// Recursive randomized quicksort function
+template<typename T>
+void randomized_quicksort(T *arr, long low, long high) {
+    if (low < high) {
+        long pivot = randomized_partition(arr, low, high); 
+        randomized_quicksort(arr, low, pivot - 1);
+        randomized_quicksort(arr, pivot + 1, high); 
+    }
+}
+
+// Initial call of randomized quicksort function
+template<typename T>
+void randomized_quicksort(T *arr, long n) {
+    randomized_quicksort(arr, 0, n - 1);
 }
 
 //==============================================================
@@ -73,24 +141,7 @@ T find_median_pivot_index(T *arr, long low, long high){
 }
 
 //==============================================================
-// Function: exchange
-// Huy Phan & Andrew Nguyen
-// Description: 
-// exchange two element within an array
-// PARAMETERS:
-// T& a, T& b: two elements a and b in an array
-// RETURN VALUE:
-// none, but swap a and b 
-//==============================================================
-template<typename T>
-void exchange(T& a, T& b) {
-    T temp = a;  
-    a = b;       
-    b = temp;    
-}
-
-//==============================================================
-// Function: partition
+// Function: median partition
 // Author: Huy Phan
 // Description: 
 // Partitions the array around a pivot element, using the median-of-three strategy 
@@ -107,7 +158,7 @@ void exchange(T& a, T& b) {
 // long         - The index of the pivot element after partitioning.
 //==============================================================
 template<typename T>
-long median_partition(T* arr, long low, long high) {
+long median_partition(T *arr, long low, long high) {
     long medianIndex = find_median_pivot_index(arr,low,high);
     exchange(arr[medianIndex], arr[high]);
 
@@ -143,7 +194,7 @@ long median_partition(T* arr, long low, long high) {
 //
 //==============================================================
 template<typename T>
-void fixed_improved_quicksort(T* arr, long low, long high) {
+void fixed_improved_quicksort(T *arr, long low, long high) {
     if (low < high) {
         long pivot = median_partition(arr, low, high);
         fixed_improved_quicksort(arr, low, pivot - 1); //Left subarray
@@ -167,10 +218,6 @@ void fixed_improved_quicksort(T* arr, long low, long high) {
 //
 //==============================================================
 template<typename T>
-void improved_quicksort(T* arr, long n) {
+void improved_quicksort(T *arr, long n) {
     fixed_improved_quicksort(arr, 0, n-1);
 }
-
-// Definition for randomized quicksort
-template<typename T>
-    void randomized_quicksort(T* arr, long n);
