@@ -1,6 +1,41 @@
-#include "sorting.hpp" 
+//==============================================================
+// Names: Huy Phan, Tri Dang, Andrew Nguyen
+// Class: CS 271-01
+// Project 1:
+// Date: 10/13/2024
+// About: DoublyLinkedList.cpp contains the implementations of
+// the methods for the DoublyLinkedList class, as defined in
+// the header file DoublyLinkedList.hpp.
+//==============================================================
+#include <iostream>
+#include "sorting.hpp"
 
+// Definition for insertion sort
+template<typename T>
+    void insertion_sort(T* arr, long n) {
+        // length n = 1 is "sorted"
+        if (n > 1){
+            int j;
+            T current;
+            for (long i = 1; i < n; i++ ){
+                j = i - 1;
+                current = arr[i];
+                while (j >= 0 && arr[j] > current){ //condition 1: iterates backward from array until last element, condition 2: element before is greater than current element
+                    arr[j] = arr[j + 1];
+                    j--;
+                }
+                arr[j + 1] = current;
+            }
+        }
+}
 
+// Definition for merge sort
+template<typename T>
+    void merge_sort(T* arr, long n) {
+    
+}
+
+// Swap function
 template<typename T>
 void exchange(T &a, T &b) {
     T temp = a;
@@ -8,6 +43,7 @@ void exchange(T &a, T &b) {
     b = temp;
 }
 
+// Partition function
 template<typename T>
 long partition(T *arr, long low, long high) {
     T pivot = arr[high];
@@ -23,6 +59,7 @@ long partition(T *arr, long low, long high) {
     return (i + 1);
 }
 
+// Quicksort function
 template<typename T>
 void quicksort(T *arr, long low, long high) {
     if (low < high) {
@@ -32,20 +69,18 @@ void quicksort(T *arr, long low, long high) {
     }
 }
 
+// Initial call of quicksort function
 template<typename T>
 void quicksort(T *arr, long n) {
     quicksort(arr, 0, n - 1);
 }
 
+// Randomized partion function
 template<typename T>
 long randomized_partition(T *arr, long low, long high) {
-    // Generate a random index between low and high
+    // Generate a random index between low and high then proceed as usual
     long random_pivot = low + rand() % (high - low + 1);
-
-    // Swap the randomly chosen pivot with the last element (standard pivot position)
     exchange(arr[random_pivot], arr[high]);
-
-    // Proceed with partitioning as usual
     return partition(arr, low, high);
 }
 
@@ -53,14 +88,18 @@ long randomized_partition(T *arr, long low, long high) {
 template<typename T>
 void randomized_quicksort(T *arr, long low, long high) {
     if (low < high) {
-        long pivot = randomized_partition(arr, low, high);  // Randomized partitioning
-        randomized_quicksort(arr, low, pivot - 1);  // Recursively sort left subarray
-        randomized_quicksort(arr, pivot + 1, high);  // Recursively sort right subarray
+        long pivot = randomized_partition(arr, low, high); 
+        randomized_quicksort(arr, low, pivot - 1);
+        randomized_quicksort(arr, pivot + 1, high); 
     }
 }
 
+// Initial call of randomized quicksort function
 template<typename T>
 void randomized_quicksort(T *arr, long n) {
-    randomized_quicksort(arr, 0, n - 1);  // Initial call with full array
+    randomized_quicksort(arr, 0, n - 1);
 }
 
+// Definition for improved quicksort
+template<typename T>
+    void improved_quicksort(T* arr, long n);
