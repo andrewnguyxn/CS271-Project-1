@@ -38,7 +38,16 @@ template<typename T>
         }
 }
 
-// Definition for merge. Essential for merge_sort
+//==============================================================
+// Merge
+// Author: Tri Dang
+// Essential for merge_sort. It takes in 2 arrays and compare each element from both arrays. Whoever, is the least is placed into the main array (T* arr).
+// Once any of the 2 array cannot be compared anymore, any remainder elements will automatically be added into the main array.
+// Parameters:
+//     T* arr, first Half array (T* firHalf) , Second Half array (T* secHalf), length of first half (firN), length of second half (secN)
+// Return value: 
+//     None
+//==============================================================
 template<typename T>
     void merge(T* arr ,T* firHalf, T* secHalf, long firN, long secN){
         long leftCount = 0; // splitted array of the 1st half
